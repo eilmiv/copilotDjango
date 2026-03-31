@@ -67,9 +67,9 @@ class WorldViewTest(TestCase):
         self.world.refresh_from_db()
         self.assertEqual(self.world.hello_count, 4)
 
-    def test_send_hello_get_redirects(self):
+    def test_send_hello_get_not_allowed(self):
         response = self.client.get(reverse('helloworld:send_hello', args=[self.world.pk]))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 405)
 
     def test_world_detail_not_found(self):
         response = self.client.get(reverse('helloworld:world_detail', args=[9999]))

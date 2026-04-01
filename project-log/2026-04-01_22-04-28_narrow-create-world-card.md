@@ -1,5 +1,6 @@
-- Remove dead code left behind when inline world creation was introduced — [PR #9](https://github.com/eilmiv/copilotDjango/pull/9)
-  - PR #3 added an inline form to `world_list.html` and removed the nav button linking to `/world/new/`, but did not remove the now-unreachable code
+- Narrow create-world card to a centered `col-md-6` layout — [PR #9](https://github.com/eilmiv/copilotDjango/pull/9)
+  - Wrapped the inline create-world card in `world_list.html` in `row justify-content-center` + `col-md-6` divs — [`helloworld/templates/helloworld/world_list.html#L5-L6`](https://github.com/eilmiv/copilotDjango/blob/cab98cc/helloworld/templates/helloworld/world_list.html#L5-L6)
+  - Removed dead code left behind by PR #3 that had caused the previous fix attempt to be applied to an unreachable template
     - Deleted `WorldCreateView` and its unused `CreateView` import from [`helloworld/views.py`](https://github.com/eilmiv/copilotDjango/blob/828aae1/helloworld/views.py)
     - Removed the `world/new/` URL pattern (`name='world_create'`) from [`helloworld/urls.py`](https://github.com/eilmiv/copilotDjango/blob/828aae1/helloworld/urls.py)
     - Deleted `helloworld/templates/helloworld/world_form.html` (standalone create-world template, unreachable from any UI link)

@@ -34,6 +34,20 @@ This is a Django web application that demonstrates a "Hello World" concept where
 - Templates extend `helloworld/base.html`
 - Run `python manage.py test helloworld` to run tests
 
+## Project Log
+Every pull request must include a new project log entry in the `project-log/` directory.
+
+### Naming convention
+Files are named `YYYY-MM-DD_HH-MM-SS.md` using the UTC merge timestamp so that entries sort chronologically when listed alphabetically.
+
+### Format
+Each log file is a Markdown file of bullet points:
+- Start with one or more **broad, abstract** top-level bullets describing the overall goal of the PR (e.g., "Add greeting animation when sending hello to a world")
+- Under each abstract bullet, add **indented sub-bullets** that concretise the change (e.g. which feature was introduced)
+- Under those, add further **indented sub-bullets** listing detailed code changes (files added/modified, specific symbols changed)
+- Keep bullets precise but minimal — no complete sentences
+- If a concrete change serves multiple abstract goals, introduce a new top-level bullet that references the relevant prior bullets instead of duplicating it under each one
+
 ## Testing
 Run tests with:
 ```bash

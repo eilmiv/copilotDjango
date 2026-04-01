@@ -74,3 +74,34 @@ class WorldViewTest(TestCase):
     def test_world_detail_not_found(self):
         response = self.client.get(reverse('helloworld:world_detail', args=[9999]))
         self.assertEqual(response.status_code, 404)
+
+    def test_world_list_contains_create_form(self):
+        response = self.client.get(reverse('helloworld:world_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<form method="post"')
+        self.assertContains(response, 'name="name"')
+
+    def test_world_list_inline_create_valid(self):
+        response = self.client.post(
+            reverse('helloworld:world_list'),
+            {'name': 'InlineWorld'},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(World.objects.filter(name='InlineWorld').exists())
+
+    def test_world_list_inline_create_duplicate_shows_error(self):
+        response = self.client.post(
+            reverse('helloworld:world_list'),
+            {'name': 'Earth'},  # already exists in setUp
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'already exists')
+        self.assertEqual(World.objects.filter(name='Earth').count(), 1)
+
+    def test_world_list_inline_create_empty_name(self):
+        response = self.client.post(
+            reverse('helloworld:world_list'),
+            {'name': ''},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(World.objects.filter(name='').exists())

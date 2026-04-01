@@ -78,8 +78,7 @@ copilotDjango/
 │       └── helloworld/
 │           ├── base.html
 │           ├── world_list.html
-│           ├── world_detail.html
-│           └── world_form.html
+│           └── world_detail.html
 ├── .github/
 │   ├── workflows/
 │   │   └── ci.yml       # GitHub Actions CI

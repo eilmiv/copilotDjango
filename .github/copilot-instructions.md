@@ -15,14 +15,12 @@ This is a Django web application that demonstrates a "Hello World" concept where
 - `World`: Has `name` (unique CharField), `hello_count` (PositiveIntegerField), and `created_at` (DateTimeField). The `send_hello()` method increments the count.
 
 ### Views
-- `WorldListView`: Lists all worlds with their hello counts
+- `WorldListView`: Lists all worlds with their hello counts; also handles inline world creation via POST (uses `FormMixin`)
 - `WorldDetailView`: Shows a single world and its count, with a button to send hello
-- `WorldCreateView`: Form to create a new world
 - `send_hello`: POST endpoint that increments a world's hello count
 
 ### URLs
-- `/` → world list
-- `/world/new/` → create world
+- `/` → world list (also handles inline world creation via POST)
 - `/world/<pk>/` → world detail
 - `/world/<pk>/hello/` → send hello (POST only recommended)
 
@@ -33,6 +31,7 @@ This is a Django web application that demonstrates a "Hello World" concept where
 - Use function-based views for simple actions like `send_hello`
 - Templates extend `helloworld/base.html`
 - Run `python manage.py test helloworld` to run tests
+- **When replacing a feature or UI flow with an alternative implementation, remove all code that is no longer reachable**: views, URLs, templates, tests, and update these instructions and `README.md`. Leaving dead code behind causes future Copilot sessions to work on it thinking it is still active.
 
 ## Project Log
 Every pull request must include a new project log entry in the `project-log/` directory.

@@ -1,21 +1,17 @@
 - Introduce project-log system for tracking PR changes — [PR #6](https://github.com/eilmiv/copilotDjango/pull/6)
-  - Create `project-log/` directory with one Markdown file per merged PR so reviewers can quickly see the rationale of every past change — [`75624b6`](https://github.com/eilmiv/copilotDjango/commit/75624b6)
+  - Create `project-log/` directory with one Markdown file per merged PR so reviewers can quickly see the rationale of every past change — [`b669ea5`](https://github.com/eilmiv/copilotDjango/commit/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e)
     - Backfilled historical entry for PR #1 (create Hello World app)
-      - [`project-log/2026-04-01_07-20-55_create-hello-world-django-app.md`](https://github.com/eilmiv/copilotDjango/blob/75624b6/project-log/2026-04-01_07-20-55_create-hello-world-django-app.md)
+      - [`project-log/2026-04-01_07-20-55_create-hello-world-django-app.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/project-log/2026-04-01_07-20-55_create-hello-world-django-app.md)
     - Backfilled historical entry for PR #5 (greeting animation)
-      - [`project-log/2026-04-01_19-53-58_add-greeting-animation.md`](https://github.com/eilmiv/copilotDjango/blob/75624b6/project-log/2026-04-01_19-53-58_add-greeting-animation.md)
+      - [`project-log/2026-04-01_19-53-58_add-greeting-animation.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/project-log/2026-04-01_19-53-58_add-greeting-animation.md)
     - Backfilled historical entry for PR #3 (inline world creation)
-      - [`project-log/2026-04-01_20-22-20_inline-world-creation.md`](https://github.com/eilmiv/copilotDjango/blob/75624b6/project-log/2026-04-01_20-22-20_inline-world-creation.md)
-  - Improve log entries: rename files to include short summary, add per-file commit links, deepen nesting to show reasons — [`b669ea5`](https://github.com/eilmiv/copilotDjango/commit/b669ea5)
-    - Renamed all three entries to `YYYY-MM-DD_HH-MM-SS_short-summary.md` format
-    - Added GitHub commit and file links to every leaf-level change in each entry
-    - Deepened nesting where needed so parent bullet implicitly states the reason for child changes
-      - [`project-log/2026-04-01_07-20-55_create-hello-world-django-app.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5/project-log/2026-04-01_07-20-55_create-hello-world-django-app.md)
-      - [`project-log/2026-04-01_19-53-58_add-greeting-animation.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5/project-log/2026-04-01_19-53-58_add-greeting-animation.md)
-      - [`project-log/2026-04-01_20-22-20_inline-world-creation.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5/project-log/2026-04-01_20-22-20_inline-world-creation.md)
-  - Updated Copilot instructions to mandate the project log for all future PRs — [`75624b6`](https://github.com/eilmiv/copilotDjango/commit/75624b6), [`b669ea5`](https://github.com/eilmiv/copilotDjango/commit/b669ea5)
-    - Added "Project Log" section with naming convention, two-commit workflow, and format rules
-    - Naming: `YYYY-MM-DD_HH-MM-SS_short-summary.md` (UTC merge timestamp + kebab-case summary)
-    - Two-commit workflow: commit 1 = code changes; commit 2 = log entry referencing commit 1 SHA
-    - Format: unlimited nesting depth, links to PR / commits / files at leaf level, reasons implicit in hierarchy
-      - [`.github/copilot-instructions.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5/.github/copilot-instructions.md)
+      - [`project-log/2026-04-01_20-22-20_inline-world-creation.md`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/project-log/2026-04-01_20-22-20_inline-world-creation.md)
+  - Updated Copilot instructions to mandate the project log for all future PRs — [`b669ea5`](https://github.com/eilmiv/copilotDjango/commit/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e)
+    - Added "Project Log" section covering naming, two-commit workflow, and format rules
+      - [`.github/copilot-instructions.md#L37`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/.github/copilot-instructions.md#L37)
+    - Naming: `YYYY-MM-DD_HH-MM-SS_short-summary.md` (UTC merge timestamp + kebab-case summary, mirroring Django migration names)
+      - [`.github/copilot-instructions.md#L40`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/.github/copilot-instructions.md#L40)
+    - Two-commit workflow: commit 1 = code changes; commit 2 = log entry referencing commit 1 SHA so links are stable
+      - [`.github/copilot-instructions.md#L45`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/.github/copilot-instructions.md#L45)
+    - Format: unlimited nesting depth, links to PR / commits / files at every leaf, reasons implicit in hierarchy
+      - [`.github/copilot-instructions.md#L50`](https://github.com/eilmiv/copilotDjango/blob/b669ea5f1e66d7e2e5aa2b8f2aab01a38d0f543e/.github/copilot-instructions.md#L50)

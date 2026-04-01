@@ -43,16 +43,16 @@ Files are named `YYYY-MM-DD_HH-MM-SS_short-summary.md` where:
 - `short-summary` is a brief kebab-case description of the PR, similar to Django migration names (e.g., `add-greeting-animation`, `inline-world-creation`)
 
 ### Two-commit workflow
-Because the log entry should link to the exact commit SHA(s) that contain the code changes:
+Because the log entry should link to the exact lines that contain the code changes:
 1. **Commit 1** — all code changes for the PR
-2. **Commit 2** — the project log entry referencing the SHA(s) from commit 1
+2. **Commit 2** — the project log entry referencing the SHA(s) from commit 1, with line-level links where possible
 
 ### Format
 Each log file is a Markdown file of bullet points:
 - Start with one or more **broad, abstract** top-level bullets describing the overall goal of the PR; include a link to the PR (e.g., `[PR #5](https://github.com/eilmiv/copilotDjango/pull/5)`)
 - Under each abstract bullet, add **indented sub-bullets** that concretise the change — the parent bullet implicitly states *why* the child changes were made
 - Continue nesting as many levels as needed (there is no fixed maximum) down to individual file and symbol changes
-- Each leaf-level change must include a **link** to the relevant commit (`[<short-sha>](https://github.com/eilmiv/copilotDjango/commit/<full-sha>)`) and, where helpful, a link to the specific file at that commit (`[path/to/file](https://github.com/eilmiv/copilotDjango/blob/<sha>/path/to/file)`)
+- Each leaf-level change must include a link to the relevant **line(s)** at the specific commit (`[path/to/file#L42](https://github.com/eilmiv/copilotDjango/blob/<sha>/path/to/file#L42)`); fall back to a file link or bare commit link only when a line number is not meaningful (e.g. a new file, a deletion, or a migration)
 - Keep bullets precise but minimal — no complete sentences
 - If a concrete change serves multiple abstract goals, introduce a new top-level bullet that references the relevant prior bullets instead of duplicating it under each one
 

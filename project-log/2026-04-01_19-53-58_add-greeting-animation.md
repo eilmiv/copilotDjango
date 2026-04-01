@@ -1,0 +1,21 @@
+- Add greeting animation when sending hello to a world — [PR #5](https://github.com/eilmiv/copilotDjango/pull/5)
+  - Show visual feedback so users know their hello was registered — [`7d4b110`](https://github.com/eilmiv/copilotDjango/commit/7d4b110)
+    - Added CSS keyframe animations in `world_detail.html`
+      - `floatUp`: translates and fades out upward over 1.2 s
+      - `countPop`: scales the count element to 1.5× then back, briefly coloured green
+      - `.greeting-particle` class applies `floatUp` to emoji spans
+      - `#hello-area` set to `position: relative; display: inline-block` for particle anchoring
+        - [`helloworld/templates/helloworld/world_detail.html`](https://github.com/eilmiv/copilotDjango/blob/7d4b110/helloworld/templates/helloworld/world_detail.html)
+    - Wrapped hello form in `<div id="hello-area">` for particle positioning
+      - [`helloworld/templates/helloworld/world_detail.html`](https://github.com/eilmiv/copilotDjango/blob/7d4b110/helloworld/templates/helloworld/world_detail.html)
+    - Added inline JS executed when `?greeted=1` is present in URL
+      - Spawns three 👋 `.greeting-particle` spans with staggered `animationDelay` (0 s, 0.15 s, 0.30 s)
+      - Applies `count-pop` class to `#hello-count` element; removes class on `animationend`
+      - Cleans `?greeted=1` from URL via `history.replaceState` to prevent replay on page refresh
+        - [`helloworld/templates/helloworld/world_detail.html`](https://github.com/eilmiv/copilotDjango/blob/7d4b110/helloworld/templates/helloworld/world_detail.html)
+  - Redirect after hello now appends `?greeted=1` to trigger animation — [`7d4b110`](https://github.com/eilmiv/copilotDjango/commit/7d4b110)
+    - `send_hello` view uses `reverse(...) + '?greeted=1'` instead of plain `redirect`
+    - Added `reverse` import alongside existing `reverse_lazy`
+      - [`helloworld/views.py`](https://github.com/eilmiv/copilotDjango/blob/7d4b110/helloworld/views.py)
+  - Added test verifying `?greeted=1` is present in the redirect response URL — [`7d4b110`](https://github.com/eilmiv/copilotDjango/commit/7d4b110)
+    - [`helloworld/tests.py`](https://github.com/eilmiv/copilotDjango/blob/7d4b110/helloworld/tests.py)

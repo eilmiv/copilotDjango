@@ -1,0 +1,23 @@
+- Add inline world creation form on world list page — [PR #3](https://github.com/eilmiv/copilotDjango/pull/3)
+  - Remove friction of navigating to a separate page just to create a world — [`d4d1dc4`](https://github.com/eilmiv/copilotDjango/commit/d4d1dc4), [`0faa590`](https://github.com/eilmiv/copilotDjango/commit/0faa590)
+    - Replaced page-header "Create World" button with an inline card form on the list page
+      - Removed `<a href="…world_create…">+ Create World</a>` button from list header
+      - Added Bootstrap card with `<form method="post">` containing the `name` field, inline validation feedback, and "Create" submit button
+      - Updated empty-state alert to reference the inline form instead of a separate link
+        - [`helloworld/templates/helloworld/world_list.html`](https://github.com/eilmiv/copilotDjango/blob/0faa590/helloworld/templates/helloworld/world_list.html)
+    - Card header renamed from "Quick Create World" → "Create World" to avoid implying other flows are slow
+      - [`helloworld/templates/helloworld/world_list.html`](https://github.com/eilmiv/copilotDjango/blob/0faa590/helloworld/templates/helloworld/world_list.html)
+    - Removed "Create World" nav link from base template (superseded by inline form) — [`d4d1dc4`](https://github.com/eilmiv/copilotDjango/commit/d4d1dc4)
+      - [`helloworld/templates/helloworld/base.html`](https://github.com/eilmiv/copilotDjango/blob/d4d1dc4/helloworld/templates/helloworld/base.html)
+  - Extended `WorldListView` to handle POST for inline creation — [`d4d1dc4`](https://github.com/eilmiv/copilotDjango/commit/d4d1dc4)
+    - Mixed in `FormMixin` so the list view owns the create form lifecycle
+    - `get_form_class()` returns `modelform_factory(World, fields=['name'])`
+    - `post()` validates form; on success calls `form_valid()`; on failure re-renders list with error state
+    - `form_valid()` saves the new `World` and delegates redirect to `FormMixin`
+    - `success_url = reverse_lazy('helloworld:world_list')` redirects back to the list
+    - Added imports: `modelform_factory` (django.forms), `FormMixin` (django.views.generic.edit)
+      - [`helloworld/views.py`](https://github.com/eilmiv/copilotDjango/blob/d4d1dc4/helloworld/views.py)
+  - Added tests for inline world creation — [`d4d1dc4`](https://github.com/eilmiv/copilotDjango/commit/d4d1dc4)
+    - Valid POST: world created, redirects to list
+    - Invalid POST (duplicate name): re-renders list with validation errors
+      - [`helloworld/tests.py`](https://github.com/eilmiv/copilotDjango/blob/d4d1dc4/helloworld/tests.py)

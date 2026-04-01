@@ -38,13 +38,21 @@ This is a Django web application that demonstrates a "Hello World" concept where
 Every pull request must include a new project log entry in the `project-log/` directory.
 
 ### Naming convention
-Files are named `YYYY-MM-DD_HH-MM-SS.md` using the UTC merge timestamp so that entries sort chronologically when listed alphabetically.
+Files are named `YYYY-MM-DD_HH-MM-SS_short-summary.md` where:
+- `YYYY-MM-DD_HH-MM-SS` is the **UTC merge timestamp** so entries sort chronologically when listed alphabetically
+- `short-summary` is a brief kebab-case description of the PR, similar to Django migration names (e.g., `add-greeting-animation`, `inline-world-creation`)
+
+### Two-commit workflow
+Because the log entry should link to the exact commit SHA(s) that contain the code changes:
+1. **Commit 1** — all code changes for the PR
+2. **Commit 2** — the project log entry referencing the SHA(s) from commit 1
 
 ### Format
 Each log file is a Markdown file of bullet points:
-- Start with one or more **broad, abstract** top-level bullets describing the overall goal of the PR (e.g., "Add greeting animation when sending hello to a world")
-- Under each abstract bullet, add **indented sub-bullets** that concretise the change (e.g. which feature was introduced)
-- Under those, add further **indented sub-bullets** listing detailed code changes (files added/modified, specific symbols changed)
+- Start with one or more **broad, abstract** top-level bullets describing the overall goal of the PR; include a link to the PR (e.g., `[PR #5](https://github.com/eilmiv/copilotDjango/pull/5)`)
+- Under each abstract bullet, add **indented sub-bullets** that concretise the change — the parent bullet implicitly states *why* the child changes were made
+- Continue nesting as many levels as needed (there is no fixed maximum) down to individual file and symbol changes
+- Each leaf-level change must include a **link** to the relevant commit (`[<short-sha>](https://github.com/eilmiv/copilotDjango/commit/<full-sha>)`) and, where helpful, a link to the specific file at that commit (`[path/to/file](https://github.com/eilmiv/copilotDjango/blob/<sha>/path/to/file)`)
 - Keep bullets precise but minimal — no complete sentences
 - If a concrete change serves multiple abstract goals, introduce a new top-level bullet that references the relevant prior bullets instead of duplicating it under each one
 

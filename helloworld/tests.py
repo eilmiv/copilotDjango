@@ -49,18 +49,6 @@ class WorldViewTest(TestCase):
         self.assertContains(response, "Earth")
         self.assertContains(response, "3")
 
-    def test_world_create_view_get(self):
-        response = self.client.get(reverse('helloworld:world_create'))
-        self.assertEqual(response.status_code, 200)
-
-    def test_world_create_view_post(self):
-        response = self.client.post(
-            reverse('helloworld:world_create'),
-            {'name': 'NewWorld'},
-        )
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(World.objects.filter(name='NewWorld').exists())
-
     def test_send_hello_view(self):
         response = self.client.post(reverse('helloworld:send_hello', args=[self.world.pk]))
         self.assertEqual(response.status_code, 302)

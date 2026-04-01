@@ -1,0 +1,11 @@
+- Narrow create-world card to a centered `col-md-6` layout — [PR #9](https://github.com/eilmiv/copilotDjango/pull/9)
+  - Wrapped the inline create-world card in `world_list.html` in `row justify-content-center` + `col-md-6` divs — [`helloworld/templates/helloworld/world_list.html#L5-L6`](https://github.com/eilmiv/copilotDjango/blob/cab98cc/helloworld/templates/helloworld/world_list.html#L5-L6)
+  - Removed dead code left behind by PR #3 that had caused the previous fix attempt to be applied to an unreachable template
+    - Deleted `WorldCreateView` and its unused `CreateView` import from [`helloworld/views.py`](https://github.com/eilmiv/copilotDjango/blob/828aae1/helloworld/views.py)
+    - Removed the `world/new/` URL pattern (`name='world_create'`) from [`helloworld/urls.py`](https://github.com/eilmiv/copilotDjango/blob/828aae1/helloworld/urls.py)
+    - Deleted `helloworld/templates/helloworld/world_form.html` (standalone create-world template, unreachable from any UI link)
+    - Removed `test_world_create_view_get` and `test_world_create_view_post` from [`helloworld/tests.py`](https://github.com/eilmiv/copilotDjango/blob/828aae1/helloworld/tests.py)
+  - Updated documentation and instructions to match the current architecture
+    - Removed `world_form.html` from project structure in [`README.md`](https://github.com/eilmiv/copilotDjango/blob/828aae1/README.md#L79-L80)
+    - Updated Views and URLs sections in [`.github/copilot-instructions.md`](https://github.com/eilmiv/copilotDjango/blob/828aae1/.github/copilot-instructions.md#L17-L27) to remove `WorldCreateView` and `/world/new/`
+    - Added guideline to always remove dead code when replacing a feature — [`.github/copilot-instructions.md#L36`](https://github.com/eilmiv/copilotDjango/blob/828aae1/.github/copilot-instructions.md#L36)

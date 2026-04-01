@@ -15,14 +15,12 @@ This is a Django web application that demonstrates a "Hello World" concept where
 - `World`: Has `name` (unique CharField), `hello_count` (PositiveIntegerField), and `created_at` (DateTimeField). The `send_hello()` method increments the count.
 
 ### Views
-- `WorldListView`: Lists all worlds with their hello counts
+- `WorldListView`: Lists all worlds with their hello counts; also handles inline world creation via POST (uses `FormMixin`)
 - `WorldDetailView`: Shows a single world and its count, with a button to send hello
-- `WorldCreateView`: Form to create a new world
 - `send_hello`: POST endpoint that increments a world's hello count
 
 ### URLs
-- `/` → world list
-- `/world/new/` → create world
+- `/` → world list (also handles inline world creation via POST)
 - `/world/<pk>/` → world detail
 - `/world/<pk>/hello/` → send hello (POST only recommended)
 
@@ -33,6 +31,7 @@ This is a Django web application that demonstrates a "Hello World" concept where
 - Use function-based views for simple actions like `send_hello`
 - Templates extend `helloworld/base.html`
 - Run `python manage.py test helloworld` to run tests
+- **When replacing a feature or UI flow with an alternative implementation, remove all code that is no longer reachable**: views, URLs, templates, tests, and update these instructions and `README.md`. Leaving dead code behind causes future Copilot sessions to work on it thinking it is still active.
 
 ## Project Log
 Every pull request must include a new project log entry in the `project-log/` directory.
@@ -54,7 +53,7 @@ Each log file is a Markdown file of bullet points:
 - Continue nesting as many levels as needed (there is no fixed maximum) down to individual file and symbol changes
 - Each leaf-level change must include a link to the relevant **line(s)** at the specific commit (`[path/to/file#L42](https://github.com/eilmiv/copilotDjango/blob/<sha>/path/to/file#L42)`); fall back to a file link or bare commit link only when a line number is not meaningful (e.g. a new file, a deletion, or a migration)
 - Keep bullets precise but minimal — no complete sentences
-- Describe the **final state** of the PR only — write as if everything was done in a single pass; do not mention intermediate commits, iterations, or the order in which changes were made during the PR
+- Describe the **final state** of the PR only — this means the complete set of changes included in the PR, even if extra scope was added during review. Write as if everything was done in a single pass; do not mention intermediate commits, iterations, or the order in which changes were made during the PR. If a PR started as a UI fix and also required a refactor to unblock it, both belong in the log.
 - If a concrete change serves multiple abstract goals, introduce a new top-level bullet that references the relevant prior bullets instead of duplicating it under each one
 
 ## Testing

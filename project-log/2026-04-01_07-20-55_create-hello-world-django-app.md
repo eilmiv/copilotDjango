@@ -1,0 +1,54 @@
+- Create Hello World Django app — [PR #1](https://github.com/eilmiv/copilotDjango/pull/1)
+  - Set up Django project and `helloworld` app skeleton — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329)
+    - `config/` package: settings, URL root, ASGI/WSGI entry points
+      - [`config/settings.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/config/settings.py)
+      - [`config/urls.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/config/urls.py)
+      - [`config/asgi.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/config/asgi.py)
+      - [`config/wsgi.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/config/wsgi.py)
+    - `helloworld/` app package with `AppConfig`
+      - [`helloworld/apps.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/apps.py)
+    - Django management entry point
+      - [`manage.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/manage.py)
+    - Single dependency pinned
+      - [`requirements.txt`](https://github.com/eilmiv/copilotDjango/blob/483c329/requirements.txt) — `Django>=4.2`
+    - Settings tweaked (INSTALLED_APPS, TEMPLATES) to wire up app — [`c65dd04`](https://github.com/eilmiv/copilotDjango/commit/c65dd04)
+      - [`config/settings.py`](https://github.com/eilmiv/copilotDjango/blob/c65dd04/config/settings.py)
+  - Added `World` model to track hello counts — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329)
+    - Fields: `name` (unique CharField), `hello_count` (PositiveIntegerField), `created_at` (DateTimeField auto_now_add)
+    - `send_hello()` method increments and saves `hello_count`
+      - [`helloworld/models.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/models.py)
+    - Initial migration creating the `World` table
+      - [`helloworld/migrations/0001_initial.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/migrations/0001_initial.py)
+  - Added views and URL routing for full CRUD + hello — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329), [`c65dd04`](https://github.com/eilmiv/copilotDjango/commit/c65dd04)
+    - `WorldListView` (ListView), `WorldDetailView` (DetailView), `WorldCreateView` (CreateView) — class-based
+    - `send_hello` — function-based view with `@require_POST`, calls `world.send_hello()`
+      - [`helloworld/views.py`](https://github.com/eilmiv/copilotDjango/blob/c65dd04/helloworld/views.py)
+    - URL patterns with `app_name = 'helloworld'` namespace
+      - [`helloworld/urls.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/urls.py)
+    - App URLs included in project root at `/`
+      - [`config/urls.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/config/urls.py)
+  - Added Bootstrap 5 templates — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329)
+    - Shared base layout with Bootstrap CDN, nav bar, and content block
+      - [`helloworld/templates/helloworld/base.html`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/templates/helloworld/base.html)
+    - World list: card grid showing each world's name and hello count
+      - [`helloworld/templates/helloworld/world_list.html`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/templates/helloworld/world_list.html)
+    - World detail: displays count and "Say Hello!" submit button
+      - [`helloworld/templates/helloworld/world_detail.html`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/templates/helloworld/world_detail.html)
+    - World creation form
+      - [`helloworld/templates/helloworld/world_form.html`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/templates/helloworld/world_form.html)
+  - Registered `World` in Django admin for management UI — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329)
+    - [`helloworld/admin.py`](https://github.com/eilmiv/copilotDjango/blob/483c329/helloworld/admin.py)
+  - Added GitHub Actions CI to verify tests pass on every push — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329), [`2c29852`](https://github.com/eilmiv/copilotDjango/commit/2c29852)
+    - Matrix over Python 3.10, 3.11, 3.12
+      - [`.github/workflows/ci.yml`](https://github.com/eilmiv/copilotDjango/blob/483c329/.github/workflows/ci.yml)
+    - `GITHUB_TOKEN` permissions restricted to `contents: read` to limit blast radius
+      - [`.github/workflows/ci.yml`](https://github.com/eilmiv/copilotDjango/blob/2c29852/.github/workflows/ci.yml)
+  - Added comprehensive test suite — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329), [`c65dd04`](https://github.com/eilmiv/copilotDjango/commit/c65dd04)
+    - Model tests: `send_hello()` increments count; `name` uniqueness enforced
+    - View tests: list, detail, create, send_hello responses and redirects
+      - [`helloworld/tests.py`](https://github.com/eilmiv/copilotDjango/blob/c65dd04/helloworld/tests.py)
+  - Added project metadata — [`483c329`](https://github.com/eilmiv/copilotDjango/commit/483c329)
+    - MIT License — [`LICENSE`](https://github.com/eilmiv/copilotDjango/blob/483c329/LICENSE)
+    - Python/Django `.gitignore` — [`.gitignore`](https://github.com/eilmiv/copilotDjango/blob/483c329/.gitignore)
+    - Full project documentation — [`README.md`](https://github.com/eilmiv/copilotDjango/blob/483c329/README.md)
+    - Copilot development instructions — [`.github/copilot-instructions.md`](https://github.com/eilmiv/copilotDjango/blob/483c329/.github/copilot-instructions.md)

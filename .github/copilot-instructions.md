@@ -34,6 +34,29 @@ This is a Django web application that demonstrates a "Hello World" concept where
 - Templates extend `helloworld/base.html`
 - Run `python manage.py test helloworld` to run tests
 
+## Project Log
+Every pull request must include a new project log entry in the `project-log/` directory.
+
+### Naming convention
+Files are named `YYYY-MM-DD_HH-MM-SS_short-summary.md` where:
+- `YYYY-MM-DD_HH-MM-SS` is the **UTC merge timestamp** so entries sort chronologically when listed alphabetically
+- `short-summary` is a brief kebab-case description of the PR, similar to Django migration names (e.g., `add-greeting-animation`, `inline-world-creation`)
+
+### Two-commit workflow
+Because the log entry should link to the exact lines that contain the code changes:
+1. **Commit 1** — all code changes for the PR
+2. **Commit 2** — the project log entry referencing the SHA(s) from commit 1, with line-level links where possible
+
+### Format
+Each log file is a Markdown file of bullet points:
+- Start with one or more **broad, abstract** top-level bullets describing the overall goal of the PR; include a link to the PR (e.g., `[PR #5](https://github.com/eilmiv/copilotDjango/pull/5)`)
+- Under each abstract bullet, add **indented sub-bullets** that concretise the change — the parent bullet implicitly states *why* the child changes were made
+- Continue nesting as many levels as needed (there is no fixed maximum) down to individual file and symbol changes
+- Each leaf-level change must include a link to the relevant **line(s)** at the specific commit (`[path/to/file#L42](https://github.com/eilmiv/copilotDjango/blob/<sha>/path/to/file#L42)`); fall back to a file link or bare commit link only when a line number is not meaningful (e.g. a new file, a deletion, or a migration)
+- Keep bullets precise but minimal — no complete sentences
+- Describe the **final state** of the PR only — write as if everything was done in a single pass; do not mention intermediate commits, iterations, or the order in which changes were made during the PR
+- If a concrete change serves multiple abstract goals, introduce a new top-level bullet that references the relevant prior bullets instead of duplicating it under each one
+
 ## Testing
 Run tests with:
 ```bash

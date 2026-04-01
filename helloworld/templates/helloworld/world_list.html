@@ -1,0 +1,27 @@
+{% extends "helloworld/base.html" %}
+{% block title %}Worlds{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>🌍 Worlds</h1>
+    <a href="{% url 'helloworld:world_create' %}" class="btn btn-primary">+ Create World</a>
+</div>
+{% if worlds %}
+<div class="row">
+    {% for world in worlds %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ world.name }}</h5>
+                <p class="card-text">
+                    <span class="badge bg-success fs-6">{{ world.hello_count }} Hello(s)</span>
+                </p>
+                <a href="{% url 'helloworld:world_detail' world.pk %}" class="btn btn-outline-primary btn-sm">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">No worlds yet. <a href="{% url 'helloworld:world_create' %}">Create one!</a></div>
+{% endif %}
+{% endblock %}

@@ -66,6 +66,7 @@ class WorldViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.world.refresh_from_db()
         self.assertEqual(self.world.hello_count, 4)
+        self.assertIn('greeted=1', response['Location'])
 
     def test_send_hello_get_not_allowed(self):
         response = self.client.get(reverse('helloworld:send_hello', args=[self.world.pk]))

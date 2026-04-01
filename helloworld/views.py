@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.edit import FormMixin
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from .models import World
 
 
@@ -45,4 +45,4 @@ class WorldCreateView(CreateView):
 def send_hello(request, pk):
     world = get_object_or_404(World, pk=pk)
     world.send_hello()
-    return redirect('helloworld:world_detail', pk=pk)
+    return redirect(reverse('helloworld:world_detail', args=[pk]) + '?greeted=1')

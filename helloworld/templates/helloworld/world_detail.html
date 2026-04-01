@@ -1,20 +1,80 @@
 {% extends "helloworld/base.html" %}
 {% block title %}{{ world.name }}{% endblock %}
 {% block content %}
+<style>
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
+  }
+  @keyframes countPop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.5); color: var(--bs-success); }
+    100% { transform: scale(1); }
+  }
+  .greeting-particle {
+    position: absolute;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: floatUp 1.2s ease-out forwards;
+  }
+  .count-pop {
+    display: inline-block;
+    animation: countPop 0.6s ease-out;
+  }
+  #hello-area {
+    position: relative;
+    display: inline-block;
+  }
+</style>
+
 <div class="card">
     <div class="card-header">
         <h2>🌍 {{ world.name }}</h2>
     </div>
     <div class="card-body">
-        <p class="display-6">Hello World count: <strong>{{ world.hello_count }}</strong></p>
-        <form method="post" action="{% url 'helloworld:send_hello' world.pk %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-success btn-lg">👋 Say Hello!</button>
-        </form>
+        <p class="display-6">Hello World count: <strong id="hello-count">{{ world.hello_count }}</strong></p>
+        <div id="hello-area">
+            <form method="post" action="{% url 'helloworld:send_hello' world.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-lg">👋 Say Hello!</button>
+            </form>
+        </div>
     </div>
     <div class="card-footer text-muted">
         Created: {{ world.created_at|date:"F j, Y" }}
     </div>
 </div>
 <a href="{% url 'helloworld:world_list' %}" class="btn btn-secondary mt-3">← Back to Worlds</a>
+
+{% if request.GET.greeted %}
+<script>
+  (function () {
+    var area = document.getElementById('hello-area');
+    var rect = area.getBoundingClientRect();
+    var offsets = [-30, 0, 30];
+
+    offsets.forEach(function (offset, i) {
+      var el = document.createElement('span');
+      el.textContent = '👋';
+      el.className = 'greeting-particle';
+      el.style.left = (area.offsetLeft + area.offsetWidth / 2 + offset) + 'px';
+      el.style.top = area.offsetTop + 'px';
+      el.style.animationDelay = (i * 0.15) + 's';
+      area.parentNode.appendChild(el);
+      el.addEventListener('animationend', function () { el.remove(); });
+    });
+
+    var countEl = document.getElementById('hello-count');
+    countEl.classList.add('count-pop');
+    countEl.addEventListener('animationend', function () {
+      countEl.classList.remove('count-pop');
+    });
+
+    // Clean URL so a page refresh doesn't replay the animation
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  })();
+</script>
+{% endif %}
 {% endblock %}

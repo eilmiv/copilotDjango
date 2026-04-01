@@ -1,0 +1,5 @@
+- Improve the create-world page layout so the form card no longer spans the full page width — [PR #9](https://github.com/eilmiv/copilotDjango/pull/9)
+  - Wrap the card in a Bootstrap centered-row grid to limit its width and center it on the page
+    - Added `row justify-content-center` outer div and `col-md-6` inner div around the card in [`helloworld/templates/helloworld/world_form.html`](https://github.com/eilmiv/copilotDjango/blob/98cf052ae91233227a26150002352d79959bdee2/helloworld/templates/helloworld/world_form.html#L4-L5)
+  - Aligned error-feedback markup with the style used in `world_list.html`
+    - Input field uses `is-invalid` CSS class when errors present and `invalid-feedback` div (instead of `d-block`) — [`world_form.html#L14-L17`](https://github.com/eilmiv/copilotDjango/blob/98cf052ae91233227a26150002352d79959bdee2/helloworld/templates/helloworld/world_form.html#L14-L17)
